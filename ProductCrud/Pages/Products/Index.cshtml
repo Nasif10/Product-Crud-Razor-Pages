@@ -1,0 +1,55 @@
+﻿@page "/"
+@model ProductCrud.Pages.Products.IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h2>Products</h2>
+
+<div class="d-flex justify-content-between">
+      <div>
+         <p><a asp-page="Create">Create New</a></p>
+      </div>
+      <div>
+         <form>
+            <p>
+                <input type="text" asp-for="SearchString" placeholder="Name" />
+                <input type="submit" value="Search" />
+            </p>
+        </form>
+      </div>
+ </div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>          
+            <th>Name</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+    @if (Model.Product != null)
+    {
+        @foreach (var item in Model.Product)
+        {
+            <tr>
+                <td>@item.Id</td>          
+                <td>@item.Name</td>
+                <td>@item.Category</td>
+                <td>@item.Description</td>
+                <td>@item.Price</td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
